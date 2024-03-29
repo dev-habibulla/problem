@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 //             const prisma = new PrismaClient();
 
 //             const result = await prisma.Employee.findMany ({
-//               cursor:{id:6}, 
+//               cursor:{id:6},   problem 1
 //             //skip:2,
 //               take:2
 
@@ -28,7 +28,7 @@ import { NextResponse } from "next/server";
 
 //         const result = await prisma.user.findUnique({
 //             //  where: { id: 5 },
-//             where:{email: "123a@gmail.com"},
+//             where:{email: "123a@gmail.com"},   problem 2
 
 //         });
 
