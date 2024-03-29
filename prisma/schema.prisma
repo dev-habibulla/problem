@@ -1,0 +1,81 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+
+// model User{
+//   id Int @id @default(autoincrement())
+//   email String @unique
+//   name String
+//   city String
+//   phone String
+//   postcode String
+// }
+
+
+// enum UserType{
+//   New
+//   Existing
+//   VIP
+//   Regular
+//   Bad
+// }
+
+
+
+model user{
+  id Int @id @default(autoincrement())
+  email String @db.VarChar(100)
+  password String
+  Profile profile?
+  post post[]
+  comment comment[]
+
+}
+
+model profile{
+  id Int @id @default(autoincrement())
+  fname String
+  lname String
+  city String
+  postcode Int
+  userID Int @unique
+  user user @relation(fields: [userID],references: [id],onDelete: Restrict,onUpdate: Cascade)
+}
+
+model post{
+    id Int @id @default(autoincrement())
+    title String
+    description String
+    userId Int 
+    user user @relation(fields: [userId],references:[id],onDelete: Restrict,onUpdate: Cascade)
+    comment comment[]
+}
+
+model comment{
+   id Int @id @default(autoincrement())
+   des String
+   userId Int
+   user user @relation(fields: [userId],references:[id],onDelete: Restrict,onUpdate: Cascade)
+   postId Int 
+   post post @relation(fields: [postId],references:[id],onDelete: Restrict,onUpdate: Cascade)
+}
+
+model Employee{
+  id Int @id @default(autoincrement())
+  name String
+  desigantion String
+  city String
+  salary Int
+}
